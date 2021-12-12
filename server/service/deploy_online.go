@@ -129,7 +129,7 @@ func OnlineUpdate(id uint, status int, username string, result string) (err erro
 
 func OnlineRversion(id float64) (err error, list interface{}) {
 	var online []model.DeployOnline
-	err = global.GVA_DB.Where("deploy_project_id = ? and isdelete = 1", id).Group("version").Order("created_at desc").Find(&online).Error
+	err = global.GVA_DB.Where("deploy_project_id = ? and isdelete = 1", id).Order("created_at desc").Find(&online).Error
 	return err, online
 }
 

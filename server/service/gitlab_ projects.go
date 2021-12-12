@@ -14,6 +14,9 @@ import (
 func ProjectImport() (err error) {
 	projecs, err := utils.GetGitlabprojects()
 	if err == nil {
+		if len(projecs) == 0 {
+			return err
+		}
 		go func() {
 			for id, project := range projecs {
 				gitproject := &model.GitlabProject{

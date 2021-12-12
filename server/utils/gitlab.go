@@ -9,8 +9,8 @@ import (
 
 func GetGitlabprojects() (projecs map[int]map[string]string, err error) {
 	// 获取项目列表
-	var url string = global.GVA_CONFIG.Gitlab.Url
-	var token string = global.GVA_CONFIG.Gitlab.Token
+	var url = global.GVA_CONFIG.Gitlab.Url
+	var token = global.GVA_CONFIG.Gitlab.Token
 	git, err := gitlab.NewClient(token, gitlab.WithBaseURL(url))
 	if err != nil {
 		panic(err)
@@ -26,7 +26,7 @@ func GetGitlabprojects() (projecs map[int]map[string]string, err error) {
 			},
 		}
 		projects, _, err := git.Projects.ListProjects(opt)
-		if len(projects) == 0 && err == nil {
+		if len(projects) == 0 || err != nil {
 			break
 		}
 		for _, pt := range projects {
